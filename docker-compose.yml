@@ -25,6 +25,29 @@ services:
             - "127.0.0.1:5433:5432"
         networks:
             - iot-network
+    subscriber:
+        build: ./subscriber
+        container_name: iot-subscriber
+        restart: unless-stopped
+
+        environment:
+            MQTT_HOST: mqtt
+            MQTT_PORT: 1883
+            MQTT_USERNAME: ${MQTT_USERNAME}
+            MQTT_PASSWORD: ${MQTT_PASSWORD}
+
+            DB_HOST: timescaledb
+            DB_PORT: "5432"
+            DB_NAME: ${POSTGRES_DB}
+            DB_USER: ${POSTGRES_USER}
+            DB_PASSWORD: ${POSTGRES_PASSWORD}
+
+        depends_on:
+            - mqtt
+            - timescaledb
+
+        networks:
+            - iot-network
 
 volumes:
     timescale_data:
