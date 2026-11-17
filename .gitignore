@@ -1,0 +1,26 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# MQTT credentials
+mosquitto/config/passwordfile
+
+# Database persistence
+mosquitto/data/
+mosquitto/log/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+
+# Private keys
+*.pem
+*.key
